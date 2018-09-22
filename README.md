@@ -1,0 +1,1 @@
+# Nasdaqbaltic frontend app

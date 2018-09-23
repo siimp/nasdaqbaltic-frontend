@@ -32,11 +32,11 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                         <thead>
                             <tr>
                                 <th>Company</th>
-                                <th>Dividend yield</th>
-                                <th>Dividend amount</th>
-                                <th>Price at ex-dividend</th>
-                                <th>Ex-Dividend date</th>
-                                <th />
+                                <th>Dividend Yield</th>
+                                <th>Dividend Amount</th>
+                                <th>Price at Ex-Dividend</th>
+                                <th>Ex-Dividend Date</th>
+                                <th>Nasdaq</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,8 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                                 exDividendDate={el.exDividendDate}
                                 stockPriceAtExDividend={el.stockPriceAtExDividend}
                                 dividendAmount={el.dividendAmount}
-                                infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&instrument=' + el.isin} />))}
+                                isin={el.isin}
+                                infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&lang=en&instrument=' + el.isin} />))}
                         </tbody>
                     </table>
                 }

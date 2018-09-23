@@ -1,17 +1,20 @@
 import * as React from 'react';
+import { isUndefined } from 'util';
 import DividendYieldRow from './DividendYieldRow/DividendYieldRow';
 
-const API = 'http://localhost:8080/dividend-yield?year=';
+const API_HOST = 'http://localhost:8080';
+const API_YEAR = API_HOST + '/dividend-yield?year=';
+const API_FUTURE = API_HOST + '/dividend-yield/future';
 
 export interface IDividendYieldProps {
-    year: string
+    year?: number
 }
 
 export interface IDividendYieldState {
     data: any[]
 }
 
-class DividendYield extends React.Component<IDividendYieldProps, IDividendYieldState> {
+class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYieldState> {
 
     constructor(props: IDividendYieldProps) {
         super(props);
@@ -24,25 +27,26 @@ class DividendYield extends React.Component<IDividendYieldProps, IDividendYieldS
         return (
             <section className="section">
                 <div className="container">
-                    <p className="subtitle">{this.props.year}</p>
                     <table className="table is-bordered">
                         <thead>
                             <tr>
                                 <th>Company</th>
                                 <th>Dividend yield</th>
-                                <th>Ex-dividend date</th>
                                 <th>Dividend amount</th>
-                                <th/>
+                                <th>Price at ex-dividend</th>
+                                <th>Ex-Dividend date</th>
+                                <th />
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.data.map(el => ( <DividendYieldRow 
-                            key={el.ticker+el.exDividendDate} 
-                            name={el.name}
-                            dividendYield={el.dividendYield}
-                            exDividendDate={el.exDividendDate}
-                            dividendAmount={el.dividendAmount}
-                            infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&instrument='+ el.isin} /> )) }
+                            {this.state.data.map(el => (<DividendYieldRow
+                                key={el.ticker + el.exDividendDate}
+                                name={el.name}
+                                dividendYield={el.dividendYield}
+                                exDividendDate={el.exDividendDate}
+                                stockPriceAtExDividend={el.stockPriceAtExDividend}
+                                dividendAmount={el.dividendAmount}
+                                infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&instrument=' + el.isin} />))}
                         </tbody>
                     </table>
                 </div>
@@ -51,9 +55,27 @@ class DividendYield extends React.Component<IDividendYieldProps, IDividendYieldS
     }
 
     public componentDidMount() {
-        fetch(API + this.props.year)
-        .then(response => response.json())
-        .then(jsonData => this.setState({data: jsonData}));
+        this.fetchData();
+    }
+
+    public componentDidUpdate(prevProps: any, prevState: any) {
+        if (this.props.year !== prevProps.year) {
+            this.fetchData();
+        }
+    }
+
+    private fetchData() {
+        console.log("fetching data", this.getApiUrl())
+        fetch(this.getApiUrl())
+            .then(response => response.json())
+            .then(jsonData => this.setState({ data: jsonData }));
+    }
+
+    private getApiUrl(): string {
+        if (isUndefined(this.props.year)) {
+            return API_FUTURE;
+        }
+        return API_YEAR + this.props.year;
     }
 }
 

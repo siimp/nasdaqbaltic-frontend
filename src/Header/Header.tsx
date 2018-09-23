@@ -1,9 +1,19 @@
 import * as React from 'react';
+import HeaderNav from './HeaderNav/HeaderNav';
 
-class Header extends React.Component {
+export interface IHeaderProps {
+    tabChangedHandler: (tabName: string) => void
+}
+
+class Header extends React.PureComponent<IHeaderProps, any> {
+
+    constructor(props: IHeaderProps) {
+        super(props);
+    }
+
     public render() {
         return (
-            <section className="hero is-info">
+            <section className="hero is-info is-small">
                 <div className="hero-body">
                     <div className="container">
                         <h1 className="title">
@@ -13,6 +23,9 @@ class Header extends React.Component {
                             Dividend Yields
                 </h2>
                     </div>
+                </div>
+                <div className="hero-foot">
+                    <HeaderNav tabChangedHandler={this.props.tabChangedHandler} />
                 </div>
             </section>
         );

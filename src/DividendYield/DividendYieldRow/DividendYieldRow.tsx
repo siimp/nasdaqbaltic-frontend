@@ -22,9 +22,9 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
             <tr>
                 <td>{this.props.name}</td>
                 <td>{this.props.dividendYield.toFixed(2)} %</td>
-                <td>{this.props.dividendAmount.toFixed(2)} €</td>
-                <td>{this.props.stockPriceAtExDividend.toFixed(2)} €</td>
-                <td><Moment format="DD.MM.YYYY">{this.props.exDividendDate}</Moment></td>
+                <td className="is-hidden-mobile">{this.props.dividendAmount.toFixed(2)} €</td>
+                <td className="is-hidden-mobile">{this.props.stockPriceAtExDividend.toFixed(2)} €</td>
+                <td className="is-hidden-mobile"><Moment format="DD.MM.YYYY">{this.props.exDividendDate}</Moment></td>
                 <td><a href={this.props.infoLink} target="_blank" rel="noopener noreferrer">{this.props.isin}</a></td>
             </tr>
         );

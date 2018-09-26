@@ -2,7 +2,7 @@ import * as React from 'react';
 import { isUndefined } from 'util';
 import DividendYieldRow from './DividendYieldRow/DividendYieldRow';
 
-const API_HOST = 'http://localhost:8080';
+const API_HOST = 'https://nasdaqbaltic.siimp.ee/api';
 const API_YEAR = API_HOST + '/dividend-yield?year=';
 const API_FUTURE = API_HOST + '/dividend-yield/future';
 
@@ -33,9 +33,9 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                             <tr>
                                 <th>Company</th>
                                 <th>Dividend Yield</th>
-                                <th>Dividend Amount</th>
-                                <th>Price at Ex-Dividend</th>
-                                <th>Ex-Dividend Date</th>
+                                <th className="is-hidden-mobile">Dividend Amount</th>
+                                <th className="is-hidden-mobile">Price at Ex-Dividend</th>
+                                <th className="is-hidden-mobile">Ex-Dividend Date</th>
                                 <th>Nasdaq</th>
                             </tr>
                         </thead>

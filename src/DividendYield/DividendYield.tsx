@@ -3,6 +3,7 @@ import { isUndefined } from 'util';
 import DividendYieldRow from './DividendYieldRow/DividendYieldRow';
 
 const API_HOST = 'https://nasdaqbaltic.siimp.ee/api';
+// const API_HOST = 'http://localhost:8080';
 const API_YEAR = API_HOST + '/dividend-yield?year=';
 const API_FUTURE = API_HOST + '/dividend-yield/future';
 
@@ -27,7 +28,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
         return (
             <section className="section">
                 <div className="container">
-                {this.state.data.length === 0 ? (<p className="is-size-5">No future dividends are announced as of current moment.</p>) :
+                {this.state.data.length === 0 ? (<p className="is-size-5">No future dividends are announced as of this moment.</p>) :
                     <table className="table is-bordered">
                         <thead>
                             <tr>
@@ -43,10 +44,8 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                             {this.state.data.map(el => (<DividendYieldRow
                                 key={el.ticker + el.exDividendDate}
                                 name={el.name}
-                                dividendYield={el.dividendYield}
-                                exDividendDate={el.exDividendDate}
-                                stockPriceAtExDividend={el.stockPriceAtExDividend}
-                                dividendAmount={el.dividendAmount}
+                                totalDividendYield={el.totalDividendYield}
+                                dividends={el.dividends}
                                 isin={el.isin}
                                 infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&lang=en&instrument=' + el.isin} />))}
                         </tbody>

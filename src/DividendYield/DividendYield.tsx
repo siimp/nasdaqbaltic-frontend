@@ -2,8 +2,8 @@ import * as React from 'react';
 import { isUndefined } from 'util';
 import DividendYieldRow from './DividendYieldRow/DividendYieldRow';
 
-const API_HOST = 'https://nasdaqbaltic.siimp.ee/api';
-// const API_HOST = 'http://localhost:8080';
+// const API_HOST = 'https://nasdaqbaltic.siimp.ee/api';
+const API_HOST = 'http://localhost:8080';
 const API_YEAR = API_HOST + '/dividend-yield?year=';
 const API_FUTURE = API_HOST + '/dividend-yield/future';
 
@@ -28,14 +28,14 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
         return (
             <section className="section">
                 <div className="container">
-                {this.state.data.length === 0 ? (<p className="is-size-5">No future dividends are announced as of this moment.</p>) :
+                {this.state.data.length === 0 ? (<p className="is-size-5">No data is available at this moment.</p>) :
                     <table className="table is-bordered">
                         <thead>
                             <tr>
                                 <th>Company</th>
                                 <th>Dividend Yield</th>
                                 <th className="is-hidden-mobile">Dividend Amount</th>
-                                <th className="is-hidden-mobile">Price at Ex-Dividend</th>
+                                <th className="is-hidden-mobile">{this.props.year ? 'Price at Ex-Dividend' : 'Stock Price'}</th>
                                 <th className="is-hidden-mobile">Ex-Dividend Date</th>
                                 <th>Nasdaq</th>
                             </tr>
@@ -45,6 +45,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                                 key={el.ticker + el.exDividendDate}
                                 name={el.name}
                                 totalDividendYield={el.totalDividendYield}
+                                totalYesterdaysDividendYield={el.totalYesterdaysDividendYield}
                                 dividends={el.dividends}
                                 isin={el.isin}
                                 infoLink={'http://www.nasdaqbaltic.com/market/?pg=details&lang=en&instrument=' + el.isin} />))}

@@ -1,7 +1,12 @@
 import * as React from "react";
 
 const CURRENT_YEAR = (new Date()).getFullYear();
-const TABS = ['Future dividends', CURRENT_YEAR.toString(), (CURRENT_YEAR - 1).toString(), (CURRENT_YEAR -2).toString()];
+const TABS = ['Future dividends'];
+
+const PAST_YEARS_TO_SHOW = 4;
+for(let year = CURRENT_YEAR; year > CURRENT_YEAR - PAST_YEARS_TO_SHOW; year--) {
+    TABS.push(year.toString())
+}
 
 export interface IHeaderNavProps {
     tabChangedHandler: (tabName: string) => void

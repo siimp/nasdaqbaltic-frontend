@@ -19,6 +19,7 @@ interface IDividend {
     currentStockPrice?: number
     exDividendDate: string
     capitalDecrease: boolean
+    dividendCost: number
 }
 
 class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> {
@@ -40,6 +41,7 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
                     <td className="is-hidden-mobile">{dividend.dividendAmount.toFixed(2)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
                     <td className="is-hidden-mobile">{this.getStockPrice(dividend)}</td>
                     <td className="is-hidden-mobile"><Moment format="DD.MM.YYYY">{dividend.exDividendDate}</Moment></td>
+                    <td className="is-hidden-mobile">{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
                     {index === 0 ? (<td rowSpan={this.props.dividends.length}>
                         <a href={this.props.infoLink} target="_blank" rel="noopener noreferrer">
                             <span className="is-hidden-mobile">{this.props.isin}</span>

@@ -10,6 +10,7 @@ export interface IDividendYieldRowProps {
     dividends: IDividend[]
     isin: string
     infoLink: string
+    detailedInfoModalSetter: any
 }
 
 interface IDividend {
@@ -42,12 +43,12 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
                     <td className="is-hidden-touch">{this.getStockPrice(dividend)}</td>
                     <td className="is-hidden-touch"><Moment format="DD.MM.YYYY">{dividend.exDividendDate}</Moment></td>
                     <td className="is-hidden-touch">{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
-                    {index === 0 ? (<td rowSpan={this.props.dividends.length}>
-                        <a href={this.props.infoLink} target="_blank" rel="noopener noreferrer">
-                            <span className="is-hidden-touch">{this.props.isin}</span>
-                            <span className="is-hidden-desktop">info</span>
-                        </a>
-                    </td>) : null} 
+                    {index === 0 ? (
+                        <td rowSpan={this.props.dividends.length} className="has-text-centered">
+                        <a className="is-hidden-touch" href={this.props.infoLink} target="_blank" rel="noopener noreferrer">{this.props.isin}</a>
+                        <button className="is-hidden-desktop button" onClick={this.showDetailedInfoModal(this.props.dividends, this.props.infoLink, this.props.isin, this.props.name)}>show</button>
+                        </td>
+                    ) : null} 
                 </tr>
             ))
         );
@@ -71,6 +72,12 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
             return dividend.currentStockPrice.toFixed(2) + ' €';
         }
         return '-';
+    }
+
+    private showDetailedInfoModal(dividends: any, infoLink: string, isin: string, name: string) : any {
+        return () => { 
+            this.props.detailedInfoModalSetter(dividends, infoLink, isin, name);
+        }
     }
 
 }

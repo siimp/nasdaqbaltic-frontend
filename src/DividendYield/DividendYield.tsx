@@ -34,10 +34,10 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                             <tr>
                                 <th>Company</th>
                                 <th>Dividend Yield</th>
-                                <th className="is-hidden-mobile">Dividend Amount</th>
-                                <th className="is-hidden-mobile">{this.props.year ? 'Price at Ex-Dividend' : 'Stock Price'}</th>
-                                <th className="is-hidden-mobile">Ex-Dividend Date</th>
-                                <th className="is-hidden-mobile">Dividend Cost</th>
+                                <th className="is-hidden-touch">Dividend Amount</th>
+                                <th className="is-hidden-touch">{this.props.year ? 'Price at Ex-Dividend' : 'Stock Price'}</th>
+                                <th className="is-hidden-touch">Ex-Dividend Date</th>
+                                <th className="is-hidden-touch">Dividend Cost</th>
                                 <th>Nasdaq</th>
                             </tr>
                         </thead>

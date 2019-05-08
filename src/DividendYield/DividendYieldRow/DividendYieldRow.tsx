@@ -38,13 +38,13 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
                     {index === 0 ? (<td rowSpan={this.props.dividends.length}>{this.props.name}</td>) : null} 
                     {index === 0 ? (<td style={this.getYieldColor(this.props)} rowSpan={this.props.dividends.length}>{this.props.totalDividendYield.toFixed(2)} %</td>) : null} 
 
-                    <td className="is-hidden-mobile">{dividend.dividendAmount.toFixed(2)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
-                    <td className="is-hidden-mobile">{this.getStockPrice(dividend)}</td>
-                    <td className="is-hidden-mobile"><Moment format="DD.MM.YYYY">{dividend.exDividendDate}</Moment></td>
-                    <td className="is-hidden-mobile">{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
+                    <td className="is-hidden-touch">{dividend.dividendAmount.toFixed(2)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
+                    <td className="is-hidden-touch">{this.getStockPrice(dividend)}</td>
+                    <td className="is-hidden-touch"><Moment format="DD.MM.YYYY">{dividend.exDividendDate}</Moment></td>
+                    <td className="is-hidden-touch">{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
                     {index === 0 ? (<td rowSpan={this.props.dividends.length}>
                         <a href={this.props.infoLink} target="_blank" rel="noopener noreferrer">
-                            <span className="is-hidden-mobile">{this.props.isin}</span>
+                            <span className="is-hidden-touch">{this.props.isin}</span>
                             <span className="is-hidden-desktop">info</span>
                         </a>
                     </td>) : null} 

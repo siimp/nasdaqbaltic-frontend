@@ -10,15 +10,17 @@ export interface IHeaderProps {
 
 export interface IHeaderState {
     showHelpModal?: boolean;
+    showNavMenu?: boolean;
 }
 
 class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
 
     constructor(props: IHeaderProps, state: IHeaderState) {
         super(props);
-        this.state = {showHelpModal: false};
+        this.state = { showHelpModal: false };
         this.openHelpModal = this.openHelpModal.bind(this);
         this.closeHelpModal = this.closeHelpModal.bind(this);
+        this.toggleNavMenu = this.toggleNavMenu.bind(this);
     }
 
     public render() {
@@ -27,10 +29,16 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
                 <div className="hero-head">
                     <nav className="navbar">
                         <div className="container">
-                            <div className="navbar-menu">
-                                <div className="navbar-end">
-                                    <a className="navbar-item is-active" onClick={this.openHelpModal}>
-                                        <FontAwesomeIcon icon={faQuestionCircle} />
+                            <a role="button" className={"navbar-burger burger" + (this.state.showNavMenu ? "is-active" : "")} data-target="navMenu"
+                                aria-label="menu" aria-expanded="false" onClick={this.toggleNavMenu}>
+                                <span aria-hidden="true" />
+                                <span aria-hidden="true" />
+                                <span aria-hidden="true" />
+                            </a>
+                            <div className={"navbar-menu" + (this.state.showNavMenu ? "is-active" : "")}>
+                                <div id="navMenu" className="navbar-end">
+                                    <a className="navbar-item" onClick={this.openHelpModal}>
+                                        <FontAwesomeIcon icon={faQuestionCircle} />&nbsp; Help
                                     </a>
                                 </div>
                             </div>
@@ -46,7 +54,6 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
                             Dividend Yields
                 </h2>
                     </div>
-
                 </div>
                 <div className="hero-foot">
                     <HeaderNav tabChangedHandler={this.props.tabChangedHandler} />
@@ -55,19 +62,19 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
                     <div className="modal-background" />
                     <div className="modal-content">
                         <h1 className="has-text-weight-bold is-size-4">Dividend yield calculation</h1>
-                        <hr/>
+                        <hr />
                         <p>
                             Dividend yield is calculated by dividing dividend amount by stock price at ex-dividend date and
                             multiplied by 100%.
                         </p>
-                        <br/>
+                        <br />
                         <p>
                             For future dividend yield calculation current stock price is used.
                         </p>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <h1 className="has-text-weight-bold is-size-4">Dividend cost</h1>
-                        <hr/>
+                        <hr />
                         <p>
                             Dividend cost is calculated by multiplying dividend amount with total number of securities.
                         </p>
@@ -79,11 +86,15 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
     }
 
     public openHelpModal() {
-        this.setState({showHelpModal: true});
+        this.setState({ showHelpModal: true });
     }
 
     public closeHelpModal() {
-        this.setState({showHelpModal: false});
+        this.setState({ showHelpModal: false });
+    }
+
+    public toggleNavMenu() {
+        this.setState({ showNavMenu: !this.state.showNavMenu });
     }
 }
 

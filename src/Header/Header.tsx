@@ -48,10 +48,10 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
                 <div className="hero-body">
                     <div className="container">
                         <h1 className="title">
-                            Nasdaq Baltic
+                            Dividend Yields
                 </h1>
                         <h2 className="subtitle">
-                            Dividend Yields
+                            Baltic market only
                 </h2>
                     </div>
                 </div>

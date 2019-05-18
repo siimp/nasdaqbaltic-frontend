@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import { isUndefined } from 'util';
+import DividendUtil from '../util/DividendUtil';
 import './DividendYield.css';
 import DividendYieldRow from './DividendYieldRow/DividendYieldRow';
 
@@ -63,11 +64,11 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                             <tbody>
                                 <tr>
                                 <td>Dividend Amount</td>
-                                    <td>{dividend.dividendAmount.toFixed(2)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
+                                    <td>{DividendUtil.toFixedNumber(dividend.dividendAmount)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
                                 </tr>
                                 <tr>
                                     <td>Price at Ex-Dividend</td>
-                                    <td>{dividend.stockPriceAtExDividend.toFixed(2) + ' €'}</td>
+                                    <td>{DividendUtil.toFixedNumber(dividend.stockPriceAtExDividend) + ' €'}</td>
                                 </tr>
                                 <tr>
                                     <td>Ex-Dividend Date</td>
@@ -75,7 +76,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                                 </tr>
                                 <tr>
                                     <td>Dividend Cost</td>
-                                    <td>{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
+                                    <td>{DividendUtil.getDividendCost(dividend)}M €</td>
                                 </tr>
                                 <tr>
                                     <td>Nasdaq</td>

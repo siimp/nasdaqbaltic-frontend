@@ -1,7 +1,7 @@
 # Nasdaq Baltic Dividend Yields
 
 #### website  
-https://nasdaqbaltic.siimp.ee/
+https://dividend-yields.siimp.ee/
 #### backend
 https://github.com/siimp/nasdaqbaltic.git
 #### frontend

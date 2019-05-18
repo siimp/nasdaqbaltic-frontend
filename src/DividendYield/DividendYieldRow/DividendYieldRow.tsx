@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import { isUndefined } from 'util';
+import DividendUtil from '../../util/DividendUtil';
 
 
 export interface IDividendYieldRowProps {
@@ -37,12 +38,12 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
             this.props.dividends.map((dividend, index) => (
                 <tr key={index}>
                     {index === 0 ? (<td rowSpan={this.props.dividends.length}>{this.props.name}</td>) : null} 
-                    {index === 0 ? (<td style={this.getYieldColor(this.props)} rowSpan={this.props.dividends.length}>{this.props.totalDividendYield.toFixed(2)} %</td>) : null} 
+                    {index === 0 ? (<td style={this.getYieldColor(this.props)} rowSpan={this.props.dividends.length}>{DividendUtil.toFixedNumber(this.props.totalDividendYield)} %</td>) : null} 
 
-                    <td className="is-hidden-touch">{dividend.dividendAmount.toFixed(2)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
+                    <td className="is-hidden-touch">{DividendUtil.toFixedNumber(dividend.dividendAmount)} € {dividend.capitalDecrease ? '(capital decrease)' : ''}</td>
                     <td className="is-hidden-touch">{this.getStockPrice(dividend)}</td>
                     <td className="is-hidden-touch"><Moment format="DD.MM.YYYY">{dividend.exDividendDate}</Moment></td>
-                    <td className="is-hidden-touch">{(dividend.dividendCost/1000000.0).toFixed(2)}M €</td>
+                    <td className="is-hidden-touch">{DividendUtil.getDividendCost(dividend)}M €</td>
                     {index === 0 ? (
                         <td rowSpan={this.props.dividends.length} className="has-text-centered">
                         <a className="is-hidden-touch" href={this.props.infoLink} target="_blank" rel="noopener noreferrer">{this.props.isin}</a>
@@ -67,9 +68,9 @@ class DividendYieldRow extends React.PureComponent<IDividendYieldRowProps, any> 
 
     private getStockPrice(dividend : IDividend) : string {
         if (!isUndefined(dividend.stockPriceAtExDividend)) {
-            return dividend.stockPriceAtExDividend.toFixed(2) + ' €'
+            return DividendUtil.toFixedNumber(dividend.stockPriceAtExDividend) + ' €'
         } else if (!isUndefined(dividend.currentStockPrice)) {
-            return dividend.currentStockPrice.toFixed(2) + ' €';
+            return DividendUtil.toFixedNumber(dividend.currentStockPrice) + ' €';
         }
         return '-';
     }

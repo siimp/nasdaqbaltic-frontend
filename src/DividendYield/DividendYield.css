@@ -2,3 +2,7 @@
  padding-top: 3em;
  padding-bottom: 3em;
 }
+
+.progress-bar {
+    min-height: 3em;
+}

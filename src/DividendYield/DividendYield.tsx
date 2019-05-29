@@ -41,7 +41,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
             },
             loading: true
         }
-        
+
         this.setDetailedInfoModal = this.setDetailedInfoModal.bind(this);
         this.closeDetailedInfoModal = this.closeDetailedInfoModal.bind(this);
     }
@@ -95,8 +95,13 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                 </div>
 
                 <div className="container">
-                    { this.state.loading ? (<div className="columns"><div className="column is-half"><progress className="progress is-small is-info" max="100">10%</progress></div></div>) : 
-                    (this.state.data.length === 0 ? (<p className="is-size-5">No data is available at this moment.</p>) :
+                    <div className="columns progress-bar">
+                        <div className="column is-half">
+                            { this.state.loading ? (<progress className="progress is-small is-info" max="100">10%</progress>) : (<div/>) }
+                        </div>
+                    </div>
+                
+                    { this.state.data.length === 0 ? (<p className="is-size-5">No data is available at this moment.</p>) :
                         <table className="table is-bordered">
                             <thead>
                                 <tr>
@@ -122,7 +127,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                                     detailedInfoModalSetter={this.setDetailedInfoModal} />))}
                             </tbody>
                         </table>
-                    )}
+                    }
                 </div>
             </section>
         );

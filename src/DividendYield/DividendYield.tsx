@@ -18,6 +18,7 @@ export interface IDividendYieldProps {
 export interface IDividendYieldState {
     data: any[]
     detailedInfoModal: IDetailedInfoModal
+    loading: boolean
 }
 
 export interface IDetailedInfoModal {
@@ -37,8 +38,10 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
             detailedInfoModal: {
                 dividends: [],
                 show: false,
-            }
+            },
+            loading: true
         }
+        
         this.setDetailedInfoModal = this.setDetailedInfoModal.bind(this);
         this.closeDetailedInfoModal = this.closeDetailedInfoModal.bind(this);
     }
@@ -92,7 +95,8 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                 </div>
 
                 <div className="container">
-                    {this.state.data.length === 0 ? (<p className="is-size-5">No data is available at this moment.</p>) :
+                    { this.state.loading ? (<div className="columns"><div className="column is-half"><progress className="progress is-small is-info" max="100">10%</progress></div></div>) : 
+                    (this.state.data.length === 0 ? (<p className="is-size-5">No data is available at this moment.</p>) :
                         <table className="table is-bordered">
                             <thead>
                                 <tr>
@@ -118,7 +122,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
                                     detailedInfoModalSetter={this.setDetailedInfoModal} />))}
                             </tbody>
                         </table>
-                    }
+                    )}
                 </div>
             </section>
         );
@@ -135,10 +139,11 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
     }
 
     private fetchData() {
-        console.log("fetching data", this.getApiUrl())
+        this.setState({ loading: true });
         fetch(this.getApiUrl())
             .then(response => response.json())
-            .then(jsonData => this.setState({ data: jsonData }));
+            .then(jsonData => this.setState({ data: jsonData, loading: false }))
+            .catch(error => this.setState({ loading: false }));
     }
 
     private getApiUrl(): string {

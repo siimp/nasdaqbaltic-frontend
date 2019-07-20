@@ -96,7 +96,7 @@ class DividendYield extends React.PureComponent<IDividendYieldProps, IDividendYi
 
                 <div className="container">
                     <div className="columns progress-bar">
-                        <div className="column is-half">
+                        <div className="column">
                             { this.state.loading ? (<progress className="progress is-small is-info" max="100">10%</progress>) : (<div/>) }
                         </div>
                     </div>

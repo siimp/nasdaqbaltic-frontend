@@ -26,34 +26,34 @@ class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
     public render() {
         return (
             <section className="hero is-info is-small">
-                <div className="hero-head">
-                    <nav className="navbar">
-                        <div className="container">
-                            <a role="button" className={"navbar-burger burger" + (this.state.showNavMenu ? "is-active" : "")} data-target="navMenu"
-                                aria-label="menu" aria-expanded="false" onClick={this.toggleNavMenu}>
-                                <span aria-hidden="true" />
-                                <span aria-hidden="true" />
-                                <span aria-hidden="true" />
-                            </a>
-                            <div className={"navbar-menu" + (this.state.showNavMenu ? "is-active" : "")}>
-                                <div id="navMenu" className="navbar-end">
-                                    <a className="navbar-item" onClick={this.openHelpModal}>
-                                        <FontAwesomeIcon icon={faQuestionCircle} />&nbsp; Help
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
                 <div className="hero-body">
                     <div className="container">
-                        <h1 className="title">
-                            Dividend Yields
-                </h1>
-                        <h2 className="subtitle">
-                            Baltic market only
-                </h2>
-                    </div>
+                        <div className="columns is-mobile">
+                            <div className="column">
+                                <h1 className="title">Dividend Yields</h1>
+                                <h2 className="subtitle">Baltic market only</h2>
+                            </div>
+                            <div>
+                                <nav className="navbar">
+                                    <div className="container">
+                                        <a role="button" className={"navbar-burger burger" + (this.state.showNavMenu ? "is-active" : "")} data-target="navMenu"
+                                            aria-label="menu" aria-expanded="false" onClick={this.toggleNavMenu}>
+                                            <span aria-hidden="true" />
+                                            <span aria-hidden="true" />
+                                            <span aria-hidden="true" />
+                                        </a>
+                                        <div className={"navbar-menu" + (this.state.showNavMenu ? "is-active" : "")}>
+                                            <div id="navMenu" className="navbar-end">
+                                                <a className="navbar-item" onClick={this.openHelpModal}>
+                                                    <FontAwesomeIcon icon={faQuestionCircle} />&nbsp; Help
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>     
+                        </div>  
+                    </div>             
                 </div>
                 <div className="hero-foot">
                     <HeaderNav tabChangedHandler={this.props.tabChangedHandler} />
